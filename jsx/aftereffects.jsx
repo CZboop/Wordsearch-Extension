@@ -12,7 +12,6 @@ function getLayerNames(arg) {
 
 function createGrid(data) {
     var splitData = data.split(",");
-    // alert(splitData);
 
     var myDocument = app.activeDocument;
     var artLayer = myDocument.layers.add();
@@ -25,38 +24,32 @@ function createGrid(data) {
     // NOTE: measure starts from bottom left of page - bottom, left, width, length
     for (var i = 0; i < splitData.length; i++){
         // removing line feeds
-        alert(splitData[i]);
         var currentRow = splitData[i].replace(/[\r\n]+/, "");
-        // NOTE: the way py currently set up, will always be a separator at the end resulting in empty string, loop until penultimate element
-        for (var j = 0; j < currentRow.length -1; j++){
-            var currentChar = currentRow[j];
-            if (currentChar !== "|") {
-                currentChar = currentChar.toUpperCase()
-                var rect;
-                rect = artLayer.pathItems.rectangle( -70 - 50*i, 50 + 50*j, 50, 50 );
-                rect.stroked = false;
-
-                var rectColor = new CMYKColor();
-                rectColor.cyan = 40;
-                rectColor.magenta = 40;
-                rectColor.yellow = 60;
-                rectColor.black = 100;
-                rect.strokeColor = rectColor;
-                rect.filled = false;
-
-                var textRect;
-
-                textRect = artLayer.pathItems.rectangle( -70 - 50*i - 50/10, 50 + 50*j + 5, 50 - 50/10, 50 - 50/10);
-                var areaTextRef = myDocument.textFrames.areaText(textRect);
-                var textRange = areaTextRef.textRange;
-                var textAreaCharAttrs = textRange.characterAttributes;
-                textAreaCharAttrs.size = 20;
-                areaTextRef.contents = currentChar;
-                areaTextRef.move(wsearchGroup, ElementPlacement.PLACEATEND);
-            
-                rect.move(wsearchGroup, ElementPlacement.PLACEATEND);
-            
+        currentRowReplaced = "";
+        // removing pipes between letters (remove this from py?)
+        for (var k = 0; k < currentRow.length -1; k++) {
+            if (currentRow[k] !== "|") {
+                currentRowReplaced = currentRowReplaced + currentRow[k];
             }
+        }
+        for (var j = 0; j < currentRowReplaced.length -1; j++){
+            var currentChar = currentRowReplaced[j];
+            currentChar = currentChar.toUpperCase()
+            var rect;
+            rect = artLayer.pathItems.rectangle( -70 - 50*i, 50 + 50*j, 50, 50 );
+            rect.stroked = false;
+            rect.filled = false;
+
+            var textRect;
+
+            textRect = artLayer.pathItems.rectangle( -70 - 50*i - 50/10, 50 + 50*j + 5, 50 - 50/10, 50 - 50/10);
+            var areaTextRef = myDocument.textFrames.areaText(textRect);
+            var textRange = areaTextRef.textRange;
+            var textAreaCharAttrs = textRange.characterAttributes;
+            textAreaCharAttrs.size = 20;
+            areaTextRef.contents = currentChar;
+            areaTextRef.move(wsearchGroup, ElementPlacement.PLACEATEND);
+            rect.move(wsearchGroup, ElementPlacement.PLACEATEND);
             
         }
     }
