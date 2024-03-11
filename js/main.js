@@ -50,10 +50,11 @@ function init(){
 	});
 }
 
-function submit(words, clues, drawSolution, drawSpaces){
+function submit(words){
 	// TODO: take the input, process and pass to cli
-
-	var cmdArgString = "";
+	var wordsArray = words.split(";");
+	var cmdArgString = wordsArray.join(" ")
+	alert("COMMAND LINE STRING: "+ cmdArgString)
 	var gridArray = [];
 
 	if (getOS() == "WIN") {
@@ -66,6 +67,14 @@ function submit(words, clues, drawSolution, drawSpaces){
 	terminal.stdout.on("data", function (data) {
 		// csInterface.evalScript('alertJSX('+JSON.stringify(data.toString())+')');
 		// TODO: take CLI outputs and do something with it
+		if (data.toString().startsWith("wordsearch_output")) {
+			alert("STARTS WITH EXPECTED!!")
+			alert("RETURNED DATA: " + data.toString());
+			var stringData = data.toString().trim().replace("wordsearch_output", "").split("****")[0].trim();
+			gridSplit = stringData.split("\r");
+			alert("GRID SPLIT" + gridSplit);
+			gridArray.push(...gridSplit);
+		}
 	});
 
 	terminal.stderr.on("data", function (data) {
@@ -73,7 +82,9 @@ function submit(words, clues, drawSolution, drawSpaces){
 	});
 
 	terminal.on("exit", function () {
-// TODO: main functionality
+		// TODO: main functionality
+		alert("EXITED TERMINAL PROCESS");
+		makeGrid(gridArray);
 	});
 
 	setTimeout(function() {
@@ -84,6 +95,15 @@ function submit(words, clues, drawSolution, drawSpaces){
 		terminal.stdin.end();
 	}, 1000)
 
+}
+
+function makeGrid(gridArray) {
+	alert("gridArray");
+	alert(gridArray);
+	var csInterface = new CSInterface();
+	var gridString = gridArray.join(",");
+	alert("GRID STRING: "+gridString);
+	csInterface.evalScript('createGrid('+JSON.stringify(gridString)+')');
 }
 
 function getOS() {

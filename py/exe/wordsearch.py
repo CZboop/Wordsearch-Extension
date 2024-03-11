@@ -499,6 +499,7 @@ if __name__ == "__main__":
     # NOTE: will be looking for the non-dynamic parts of output when drawing grid
     print("wordsearch_output")
     print(search.wordsearch())
+    print("****")
     print(search.solution())
     print("****")
     print(search.legend())
