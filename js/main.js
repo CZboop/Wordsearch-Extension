@@ -27,7 +27,6 @@ function init(){
 	widthDiv.id = 'widthDiv';
 	document.getElementById("container").append(widthDiv);
 
-	widthDiv.append(wordsTitle);
 	widthDiv.append(instructions);
 
 	var inputWords = document.createElement("INPUT");
@@ -81,6 +80,7 @@ function submit(words){
 		// TODO: main functionality
 		alert("EXITED TERMINAL PROCESS");
 		makeGrid(gridArray);
+		makeWordList(wordsArray);
 	});
 
 	setTimeout(function() {
@@ -100,6 +100,10 @@ function makeGrid(gridArray) {
 	var gridString = gridArray.join(",");
 	alert("GRID STRING: "+gridString);
 	csInterface.evalScript('createGrid('+JSON.stringify(gridString)+')');
+}
+
+function makeWordList(wordArray) {
+	csInterface.evalScript('createWordList('+JSON.stringify(wordArray)+')');
 }
 
 function getOS() {

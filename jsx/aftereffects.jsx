@@ -55,6 +55,24 @@ function createGrid(data) {
     }
 }
 
+function createWordList(wordArray) {
+    var wordString = wordArray.join("\n").toUpperCase();
+    // NOTE: issue seems to above, not reaching the joined alert
+    alert("JOINED STRING: "+ wordString);
+
+    var myDocument = app.activeDocument;
+    var artLayer = myDocument.layers.add();
+    artLayer.name = "Wordsearch Words";
+    // TODO: take from wordsearch output in case not all words placed?
+    var textRect = artLayer.pathItems.rectangle(- myDocument.height / 4 * 3 - 50, 50, myDocument.width / 2 - 25, myDocument.height /4 - 50);
+    var areaTextRef = myDocument.textFrames.areaText(textRect);
+    var textRange = areaTextRef.textRange;
+    var textAreaCharAttrs = textRange.characterAttributes;
+    textAreaCharAttrs.size = 24;
+    areaTextRef.contents = wordString;
+    areaTextRef.move(artLayer, ElementPlacement.PLACEATEND);
+
+}
 
 function osCheck() {
         var os = $.os;
