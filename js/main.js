@@ -19,10 +19,6 @@ var csInterface = new CSInterface();
 function init(){
 	var terminal;
 
-	var wordsTitle = document.createElement("H4");
-	wordsTitle.id = "words-title";
-	wordsTitle.innerHTML = "Words:"
-
 	var instructions = document.createElement("P");
 	instructions.id = "instructions-words";
 	instructions.innerHTML = "Enter the words for the wordsearch below (separated by semicolons)"

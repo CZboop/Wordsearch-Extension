@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ExtensionManifest
 	Version="5.0"
-	ExtensionBundleId="com.wordsearch"
+	ExtensionBundleId="com.wordsearcher"
 	ExtensionBundleVersion="1.0.0"
-	ExtensionBundleName="Wordsearch"
+	ExtensionBundleName="Wordsearcher"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<ExtensionList>
-		<Extension Id="com.wordsearch.panel" Version="1.0" />
+		<Extension Id="com.wordsearcher.panel" Version="1.0" />
 	</ExtensionList>
 
 	<ExecutionEnvironment>
@@ -25,7 +25,7 @@
 </ExecutionEnvironment>
 
 	<DispatchInfoList>
-		<Extension Id="com.wordsearch.panel">
+		<Extension Id="com.wordsearcher.panel">
 			<DispatchInfo>
 
 			<Resources>
@@ -46,7 +46,7 @@
 			<UI>
 
 				<Type>Panel</Type>
-				<Menu>Wordsearch</Menu>
+				<Menu>Wordsearcher</Menu>
 
 				<Geometry>
 					<Size>

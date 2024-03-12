@@ -1,12 +1,12 @@
-@font-face {
+/* @font-face {
     font-family: "Montserrat";
     font-weight: 400;
     font-style: normal;
     src: url("Montserrat-Regular.ttf") format('truetype');
-}
+} */
 
 * {
-	font-family: Montserrat;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 html {
@@ -20,4 +20,26 @@ body {
 	background-color: #545453;
 	color: rgb(255, 255, 255);
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#submitButton {
+	background-color: #404040;
+	color: white;
+	border-color: transparent;
+	border-radius: 15px;
+	text-align: center;
+	display: "inline-block";
+	position: "relative";
+	padding: 0.15em;
+	padding-bottom: 0.25em;
+	padding-left: 0.75em;
+	padding-right: 0.75em;
+	font-size: medium;
+	font-weight: 600;
+	margin-top: 0.75em;
+}
+
+#submitButton:hover {
+	cursor: pointer;
+	background-color: #4a4a4a;
 }
