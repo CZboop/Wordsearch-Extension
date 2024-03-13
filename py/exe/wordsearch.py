@@ -97,6 +97,7 @@ class Wordsearch:
                 self.current_word_list = xword_copy.current_word_list
                 self.grid = xword_copy.grid
             count += 1
+        self.space_around_edges()
 
     def suggest_coords(self, word) -> List[List[int]]:
         """
@@ -446,7 +447,18 @@ class Wordsearch:
             )
 
         return legend_str
-
+    
+    def space_around_edges(self):
+        dimensions = self.cols 
+        # choose random small number to add top and side
+        top_rows_to_add = random.choice([0, 1, 2])
+        side_cols_to_add = random.choice([0, 1, 2])
+        for row in range(top_rows_to_add):
+            self.grid.insert(0, ["-"]*dimensions)
+        new_height = dimensions + top_rows_to_add
+        self.grid = [(["-"] * side_cols_to_add) + row for row in self.grid]
+        for word in self.current_word_list:
+            word.col, word.row = word.col + side_cols_to_add, word.row + top_rows_to_add
 
 class Word:
     def __init__(
