@@ -35,10 +35,6 @@ function createGrid(data) {
         for (var j = 0; j < currentRowReplaced.length -1; j++){
             var currentChar = currentRowReplaced[j];
             currentChar = currentChar.toUpperCase()
-            var rect;
-            rect = artLayer.pathItems.rectangle( -70 - 50*i, 50 + 50*j, 50, 50 );
-            rect.stroked = false;
-            rect.filled = false;
 
             var textRect;
 
@@ -49,7 +45,6 @@ function createGrid(data) {
             textAreaCharAttrs.size = 20;
             areaTextRef.contents = currentChar;
             areaTextRef.move(wsearchGroup, ElementPlacement.PLACEATEND);
-            rect.move(wsearchGroup, ElementPlacement.PLACEATEND);
             
         }
     }
@@ -57,8 +52,6 @@ function createGrid(data) {
 
 function createWordList(wordArray) {
     var wordString = wordArray.join("\n").toUpperCase();
-    // NOTE: issue seems to above, not reaching the joined alert
-    alert("JOINED STRING: "+ wordString);
 
     var myDocument = app.activeDocument;
     var artLayer = myDocument.layers.add();

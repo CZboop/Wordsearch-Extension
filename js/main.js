@@ -29,7 +29,7 @@ function init(){
 
 	widthDiv.append(instructions);
 
-	var inputWords = document.createElement("INPUT");
+	var inputWords = document.createElement("TEXTAREA");
 	inputWords.id = "inputText";
 	inputWords.type = "text";
 
@@ -46,10 +46,8 @@ function init(){
 }
 
 function submit(words){
-	// TODO: take the input, process and pass to cli
 	var wordsArray = words.split(";");
 	var cmdArgString = wordsArray.join(" ")
-	alert("COMMAND LINE STRING: "+ cmdArgString)
 	var gridArray = [];
 
 	if (getOS() == "WIN") {
@@ -63,11 +61,8 @@ function submit(words){
 		// csInterface.evalScript('alertJSX('+JSON.stringify(data.toString())+')');
 		// TODO: take CLI outputs and do something with it
 		if (data.toString().startsWith("wordsearch_output")) {
-			alert("STARTS WITH EXPECTED!!")
-			alert("RETURNED DATA: " + data.toString());
 			var stringData = data.toString().trim().replace("wordsearch_output", "").split("****")[0].trim();
 			gridSplit = stringData.split("\r");
-			alert("GRID SPLIT" + gridSplit);
 			gridArray.push(...gridSplit);
 		}
 	});
@@ -77,8 +72,6 @@ function submit(words){
 	});
 
 	terminal.on("exit", function () {
-		// TODO: main functionality
-		alert("EXITED TERMINAL PROCESS");
 		makeGrid(gridArray);
 		makeWordList(wordsArray);
 	});
@@ -94,11 +87,8 @@ function submit(words){
 }
 
 function makeGrid(gridArray) {
-	alert("gridArray");
-	alert(gridArray);
 	var csInterface = new CSInterface();
 	var gridString = gridArray.join(",");
-	alert("GRID STRING: "+gridString);
 	csInterface.evalScript('createGrid('+JSON.stringify(gridString)+')');
 }
 
