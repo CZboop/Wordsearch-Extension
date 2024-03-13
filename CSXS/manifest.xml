@@ -55,7 +55,13 @@
 					</Size>
 
 				</Geometry>
-
+					<Icons>
+						<Icon Type="Normal">./icons/IconLight.png</Icon>
+						<Icon Type="RollOver">./icons/IconLight.png</Icon>
+						<Icon Type="Disabled">./icons/IconLight.png</Icon>
+						<Icon Type="DarkNormal">./icons/IconLight.png</Icon>
+						<Icon Type="DarkRollOver">./icons/IconLight.png</Icon>
+					</Icons>
 			</UI>
 		</DispatchInfo>
 	</Extension>
