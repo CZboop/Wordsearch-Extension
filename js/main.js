@@ -49,6 +49,7 @@ function submit(words){
 	var wordsArray = words.split(";");
 	var cmdArgString = wordsArray.join(" ")
 	var gridArray = [];
+	var solutionInfo;
 
 	if (getOS() == "WIN") {
 		terminal = require("child_process").spawn("cmd");
@@ -64,6 +65,9 @@ function submit(words){
 			var stringData = data.toString().trim().replace("wordsearch_output", "").split("****")[0].trim();
 			gridSplit = stringData.split("\r");
 			gridArray.push(...gridSplit);
+			var solutionData = data.toString().trim().split("****")[1].trim();
+			solutionInfo = solutionData;
+			alert(solutionInfo);
 		}
 	});
 

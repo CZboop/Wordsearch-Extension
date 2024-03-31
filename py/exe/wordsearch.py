@@ -1,5 +1,6 @@
 from typing import Tuple, List
 import random
+import argparse
 
 class WordSearch:
     def __init__(self, grid_size: Tuple, words: List, ):
@@ -125,7 +126,13 @@ class WordSearch:
         return output_grid
 
 if __name__ == "__main__":
-    word_list = ["testing", "example", "interesting", "redacted", "fun", "more", "words", "searching"]
+    parser = argparse.ArgumentParser(
+        description="Creates a wordsearch from the given words"
+    )
+    parser.add_argument("words", nargs="*", type=str)
+    args = parser.parse_args()
+    all_args = args.words
+    word_list = [i for i in all_args]
     max_len = max([len(i) for i in word_list])
     size = (int(max_len * 1.5), int(max_len * 1.5))
     print("wordsearch_output")
