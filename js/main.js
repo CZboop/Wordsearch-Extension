@@ -65,9 +65,11 @@ function submit(words){
 			var stringData = data.toString().trim().replace("wordsearch_output", "").split("****")[0].trim();
 			gridSplit = stringData.split("\r");
 			gridArray.push(...gridSplit);
-			var solutionData = data.toString().trim().split("****")[1].trim();
+			// TODO: need to make into array or into something that can be split into array in the next lower level part of the script
+			var solutionData = data.toString().trim().split("****")[1].split("|");
 			solutionInfo = solutionData;
 			alert(solutionInfo);
+			csInterface.evalScript('drawSolution('+JSON.stringify(solutionInfo)+')');
 		}
 	});
 

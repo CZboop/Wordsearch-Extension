@@ -67,6 +67,15 @@ function createWordList(wordArray) {
 
 }
 
+function drawSolution(solutionInfo) {
+    alert(solutionInfo);
+    var solutionJSON = solutionInfo.split("|");
+    alert(solutionJSON);
+    for (var i = 0; i < solutionJSON.length; i++){
+        alert(solutionJSON[i]);
+    }
+}
+
 function osCheck() {
         var os = $.os;
         var match = os.indexOf("Windows");

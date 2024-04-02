@@ -98,7 +98,7 @@ class WordSearch:
 
     def create_word_search(self) -> List:
         self._create_empty_grid()
-        self.words_placed = {} # storing the locations of words for solution
+        self.words_placed = [] # storing the locations of words for solution
         # max_tries = 100
         # TODO: system to save the best and return that if perfect grid not found in n attempts?
         for word in self.words:
@@ -108,7 +108,7 @@ class WordSearch:
                 coord = self._get_coordinate(direction, word)
                 invalid_location = self._check_overlap(coord, direction, word)
             self._place_word(coord, direction, word)
-            self.words_placed[word] = {"direction": direction, "coord": coord}
+            self.words_placed.append({"word": word, "direction": direction, "coord": coord})
         self._fill_grid()
         return self.grid
 
@@ -129,10 +129,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Creates a wordsearch from the given words"
     )
+    # parser.add_argument("size", type=int)
     parser.add_argument("words", nargs="*", type=str)
     args = parser.parse_args()
-    all_args = args.words
-    word_list = [i for i in all_args]
+    # size = args.size
+    # TODO: have the size be optional and if not given use the longest word as base
+    word_list = args.words
     max_len = max([len(i) for i in word_list])
     size = (int(max_len * 1.5), int(max_len * 1.5))
     print("wordsearch_output")
@@ -140,4 +142,6 @@ if __name__ == "__main__":
     search.create_word_search()
     search.return_solution()
     print("****")
-    print(search.words_placed)
+    word_n_placement = search.words_placed
+    placement_string = "|".join([f"{i['word']}-{i['direction']}-{i['coord']}" for i in word_n_placement])
+    print(placement_string)
