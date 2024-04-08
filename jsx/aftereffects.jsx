@@ -71,10 +71,46 @@ function drawSolution(solutionInfo) {
     alert(solutionInfo);
     var solutionJSON = solutionInfo.split("|");
     alert(solutionJSON);
+    var myDocument = app.activeDocument;
+    var artLayer = myDocument.layers.add();
+    artLayer.name = "Solution";
+
+    var wsearchGroup = artLayer.groupItems.add();
+    wsearchGroup.name = "Solution Group";
+    wsearchGroup.move(artLayer, ElementPlacement.PLACEATEND);
     for (var i = 0; i < solutionJSON.length; i++){
+        // TODO: with the direction, start point and word length, draw a box that should show the target words
         alert(solutionJSON[i]);
+        var solutionSplit = solutionJSON[i].split("-");
+        alert("solution split 0: " + solutionSplit[0]);
+        var wordLen = solutionSplit[0].replace(/^\s+|\s+$/gm,'').length;
+        alert(wordLen);
+        var direction = solutionSplit[1];
+        var coords = solutionSplit[2];
+        alert(coords);
+        var coord1 = coords.split(", ")[0].slice(1)
+        alert(coord1)
+        var coord2 = coords.split(", ")[1].slice(0, coords.split(", ")[1].length - 1)
+        alert(coord2)
+        // word-direction-(coord1,coord2)
+        var textRect;
+        if (direction == "across") {
+            textRect = artLayer.pathItems.rectangle( -70 - 50*coord1 - 50/10, 50 + 50*coord2 + 5, wordLen*50, 50);
+        }
+        if (direction == "down") {
+            textRect = artLayer.pathItems.rectangle( -70 - 50*coord1 - 50/10, 50 + 50*coord2 + 5, 50, wordLen*50);
+        }
+        if (direction == "diag_up") {
+            textRect = artLayer.pathItems.rectangle( -70 - 50*coord1 - 50/10, 50 + 50*coord2 + 5, wordLen*50, 50);
+        }
+        if (direction == "diag_down") {
+            textRect = artLayer.pathItems.rectangle( -70 - 50*coord1 - 50/10, 50 + 50*coord2 + 5, wordLen*50, 50);
+        }
+
+        textRect.move(wsearchGroup, ElementPlacement.PLACEATEND);
+            
+        }
     }
-}
 
 function osCheck() {
         var os = $.os;
