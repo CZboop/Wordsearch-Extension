@@ -94,25 +94,30 @@ function drawSolution(solutionInfo) {
         // alert(coord1)
         var coord2 = coords.split(", ")[1].slice(0, coords.split(", ")[1].length - 1);
         // alert(coord2)
-        // word-direction-(coord1,coord2)
+        // NOTE: info formatted as word-direction-(coord1,coord2)
         var textRect;
         if (direction == "across") {
-            textRect = artLayer.pathItems.rectangle( -60 - 50*coord1, 50 + 50*coord2 -12, wordLen*50, 50);
+            textRect = artLayer.pathItems.roundedRectangle( -60 - 50*coord1, 50 + 50*coord2 -12, wordLen*50, 50);
         }
         if (direction == "down") {
-            textRect = artLayer.pathItems.rectangle( -60 - 50*coord1, 50 + 50*coord2 -12, 50, wordLen*50);
+            textRect = artLayer.pathItems.roundedRectangle( -60 - 50*coord1, 50 + 50*coord2 -12, 50, wordLen*50);
         }
-        // TODO: fix daigonal solutions, wrong starting points, find centre of rotation, seems non linear differences?
         if (direction == "diag_up") {
-            textRect = artLayer.pathItems.rectangle( -70 - 50*coord1, 50 + 50*coord2 -12, wordLen*67, 50);
+            textRect = artLayer.pathItems.roundedRectangle( -70 - 50*coord1, 50 + 50*coord2 -12, wordLen*67, 50);
             textRect.rotate(45, undefined, undefined, undefined, undefined, Transformation.LEFT);
         }
         if (direction == "diag_down") {
-            textRect = artLayer.pathItems.rectangle( -10 - 50*coord1, 50 + 50*coord2 -9, wordLen*67, 50);
+            textRect = artLayer.pathItems.roundedRectangle( -10 - 50*coord1, 50 + 50*coord2 -9, wordLen*67, 50);
             textRect.rotate(315, undefined, undefined, undefined, undefined, Transformation.LEFT);
         }
-        // TODO: remove background colour on solution rect
+        var blackCMYK = new CMYKColor();
+        blackCMYK.cyan = 0;
+        blackCMYK.magenta = 0;
+        blackCMYK.yellow = 0;
+        blackCMYK.black = 100;
 
+        textRect.filled = false;
+        textRect.strokeColor = blackCMYK;
         textRect.move(wsearchGroup, ElementPlacement.PLACEATEND);
             
         }
