@@ -20,20 +20,20 @@ class WordSearch:
         '''
         # TODO: seems not working properly, sometimes giving invalid coords (example was with diag up issue with row too high, check/test overall though, prob all need fixing...)
         if direction == "across":
-            row_range = (0, len(self.grid[0]) - len(word) - 1)
-            col_range = (0, len(self.grid))
+            row_range = (0, len(self.grid) - 1)
+            col_range = (0, len(self.grid[0]) - len(word))
         elif direction == "down":
-            row_range = (0, len(self.grid[0]))
-            col_range = (0, len(self.grid) - len(word) - 1)
+            row_range = (0, len(self.grid) - len(word))
+            col_range = (0, len(self.grid[0]) - 1)
         elif direction == "diag_up":
-            row_range = (0, len(self.grid[0]) - len(word) - 1)
-            col_range = (len(self.grid) - len(word), len(self.grid))
+            row_range = (len(word) - 1, len(self.grid) - 1)
+            col_range = (0, len(self.grid[0]) - len(word))
         elif direction == "diag_down":
-            row_range = (0, len(self.grid[0]) - len(word) - 1)
-            col_range = (0, len(self.grid) - len(word) - 1)
-        random_col = random.randrange(col_range[0], col_range[1])
-        random_row = random.randrange(row_range[0], row_range[1])
-        return random_col, random_row
+            row_range = (0, len(self.grid) - len(word))
+            col_range = (0, len(self.grid[0]) - len(word))
+        random_col = random.randrange(col_range[0], col_range[1] + 1)
+        random_row = random.randrange(row_range[0], row_range[1] + 1)
+        return random_row, random_col
 
     def _place_word(self, location: Tuple, direction: str, word: str) -> List:
         '''
