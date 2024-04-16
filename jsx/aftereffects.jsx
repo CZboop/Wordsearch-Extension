@@ -58,8 +58,9 @@ function createWordList(wordArray) {
     var artLayer = myDocument.layers.add();
     artLayer.name = "Wordsearch Words";
     // TODO: take from wordsearch output in case not all words placed?
-    var textRect = artLayer.pathItems.rectangle(- myDocument.height / 4 * 3 - 50, 50, myDocument.width / 2 - 25, myDocument.height /4 - 50);
+    var textRect = artLayer.pathItems.rectangle(- myDocument.height / 4 * 3 - 50, 50, myDocument.width / 2 + 150, myDocument.width /4 - 50);
     var areaTextRef = myDocument.textFrames.areaText(textRect);
+    areaTextRef.columnCount = 4;
     var textRange = areaTextRef.textRange;
     var textAreaCharAttrs = textRange.characterAttributes;
     textAreaCharAttrs.size = 24;
