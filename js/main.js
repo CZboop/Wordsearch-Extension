@@ -69,7 +69,7 @@ function submit(words){
 			var solutionData = data.toString().trim().split("****")[1];
 			solutionInfo = solutionData;
 			alert(solutionInfo);
-			csInterface.evalScript('drawSolution('+JSON.stringify(solutionInfo)+')');
+			csInterface.evalScript('drawSolution('+JSON.stringify(solutionInfo)+','+JSON.stringify(gridArray.join(","))+')');
 		}
 	});
 

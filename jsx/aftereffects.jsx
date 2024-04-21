@@ -69,17 +69,50 @@ function createWordList(wordArray) {
 
 }
 
-function drawSolution(solutionInfo) {
+function drawSolution(solutionInfo, data) {
     alert(solutionInfo);
     var solutionJSON = solutionInfo.split("|");
     // alert(solutionJSON);
+
+    var splitData = data.split(",");
+
     var myDocument = app.activeDocument;
     var artLayer = myDocument.layers.add();
     artLayer.name = "Solution";
 
-    var wsearchGroup = artLayer.groupItems.add();
-    wsearchGroup.name = "Solution Group";
-    wsearchGroup.move(artLayer, ElementPlacement.PLACEATEND);
+    var solutionGroup = artLayer.groupItems.add();
+    solutionGroup.name = "Solution Group";
+    solutionGroup.move(artLayer, ElementPlacement.PLACEATEND);
+
+    // NOTE: measure starts from bottom left of page - bottom, left, width, length
+
+    for (var i = 0; i < splitData.length; i++){
+        // removing line feeds
+        var currentRow = splitData[i].replace(/[\r\n]+/, "");
+        currentRowReplaced = "";
+        // removing pipes between letters (remove this from py?)
+        // TODO: this is missingt he final 2 columns?
+        for (var k = 0; k < currentRow.length; k++) {
+            if (currentRow[k] !== "|") {
+                currentRowReplaced = currentRowReplaced + currentRow[k];
+            }
+        }
+        for (var j = 0; j < currentRowReplaced.length; j++){
+            var currentChar = currentRowReplaced[j];
+            currentChar = currentChar.toUpperCase()
+
+            var textRect;
+            textRect = artLayer.pathItems.rectangle( -70 - 50*i - 50/10, 50 + 50*j + 5, 50 - 50/10, 50 - 50/10);
+            var areaTextRef = myDocument.textFrames.areaText(textRect);
+            var textRange = areaTextRef.textRange;
+            var textAreaCharAttrs = textRange.characterAttributes;
+            textAreaCharAttrs.size = 20;
+            areaTextRef.contents = currentChar;
+            areaTextRef.move(solutionGroup, ElementPlacement.PLACEATEND);
+            
+        }
+    }
+    
     for (var i = 0; i < solutionJSON.length; i++){
         // TODO: centre the rectangles nicely
         // TODO: round the edges?
@@ -119,7 +152,7 @@ function drawSolution(solutionInfo) {
 
         textRect.filled = false;
         textRect.strokeColor = blackCMYK;
-        textRect.move(wsearchGroup, ElementPlacement.PLACEATEND);
+        textRect.move(solutionGroup, ElementPlacement.PLACEATEND);
             
         }
     }
