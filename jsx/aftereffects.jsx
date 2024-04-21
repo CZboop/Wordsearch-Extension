@@ -120,11 +120,11 @@ function drawSolution(solutionInfo, data) {
             textRect = artLayer.pathItems.roundedRectangle( -60 - 50*coord1, 50 + 50*coord2 -12, 50, wordLen*50);
         }
         if (direction == "diag_up") {
-            textRect = artLayer.pathItems.roundedRectangle( -70 - 50*coord1, 50 + 50*coord2 -12, wordLen*67, 50);
+            textRect = artLayer.pathItems.roundedRectangle( -75 - 50*coord1, 55 + 50*coord2 -12, wordLen*69, 50);
             textRect.rotate(45, undefined, undefined, undefined, undefined, Transformation.LEFT);
         }
         if (direction == "diag_down") {
-            textRect = artLayer.pathItems.roundedRectangle( -10 - 50*coord1, 50 + 50*coord2 -9, wordLen*67, 50);
+            textRect = artLayer.pathItems.roundedRectangle( -35 - 50*coord1, 50 + 50*coord2 -9, wordLen*69, 50);
             textRect.rotate(315, undefined, undefined, undefined, undefined, Transformation.LEFT);
         }
         var blackCMYK = new CMYKColor();
