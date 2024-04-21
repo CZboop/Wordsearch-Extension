@@ -1,4 +1,4 @@
-# Wordsearcher-Extension-Illustrator📝🔍
+# Wordsearcher Extension Illustrator📝🔍
 CEP extension for Adobe Illustrator, creates editable wordsearches :)
 
 ## Summary
@@ -24,6 +24,10 @@ Once the extension in set up locally, to use it:
 * Click the 'Submit' button
 * Wait a few seconds for the wordsearch to be drawn
 * Adjust the output to your taste. Note: the solution and non-solved grids will be exactly on top of each other initially, so you will likely want to move/rescale one of them
+
+Here's an example of use with input and output (after the different elements have been separated):
+
+![An Adobe Illustrator extension with graphic UI and some words inside, then arrows pointing to an Illustrator artboard which has a wordsearch with those same words](https://github.com/CZboop/Wordsearch-Extension/blob/main/example.png?raw=true)
 
 ## Acknowledgements
 Huge thanks to [NT Productions](https://github.com/NTProductions) for the extension testing starter code which was used as a base in this project, and his excellent tutorials on Adobe scripting, including how to incorporate terminal scripts and their outputs!
