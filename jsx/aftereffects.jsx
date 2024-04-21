@@ -6,7 +6,6 @@ function getLayerNames(arg) {
     for(var i = 1; i <= comp.numLayers; i++) {
         layerNames.push(comp.layer(i).name);
         }
-
     return JSON.stringify(layerNames);
     }
 
@@ -22,13 +21,11 @@ function createGrid(data) {
     wsearchGroup.move(artLayer, ElementPlacement.PLACEATEND);
 
     // NOTE: measure starts from bottom left of page - bottom, left, width, length
-
     for (var i = 0; i < splitData.length; i++){
         // removing line feeds
         var currentRow = splitData[i].replace(/[\r\n]+/, "");
         currentRowReplaced = "";
         // removing pipes between letters (remove this from py?)
-        // TODO: this is missingt he final 2 columns?
         for (var k = 0; k < currentRow.length; k++) {
             if (currentRow[k] !== "|") {
                 currentRowReplaced = currentRowReplaced + currentRow[k];
@@ -46,7 +43,6 @@ function createGrid(data) {
             textAreaCharAttrs.size = 20;
             areaTextRef.contents = currentChar;
             areaTextRef.move(wsearchGroup, ElementPlacement.PLACEATEND);
-            
         }
     }
 }
@@ -57,7 +53,7 @@ function createWordList(wordArray) {
     var myDocument = app.activeDocument;
     var artLayer = myDocument.layers.add();
     artLayer.name = "Wordsearch Words";
-    // TODO: take from wordsearch output in case not all words placed?
+    // NOTE: in py script will always place all words or otherwise run infinitely, so submitted words always match placed words, update this?
     var textRect = artLayer.pathItems.rectangle(- myDocument.height / 4 * 3 - 50, 50, myDocument.width / 2 + 150, myDocument.width /4 - 50);
     var areaTextRef = myDocument.textFrames.areaText(textRect);
     areaTextRef.columnCount = 4;
@@ -66,14 +62,10 @@ function createWordList(wordArray) {
     textAreaCharAttrs.size = 24;
     areaTextRef.contents = wordString;
     areaTextRef.move(artLayer, ElementPlacement.PLACEATEND);
-
 }
 
 function drawSolution(solutionInfo, data) {
-    alert(solutionInfo);
     var solutionJSON = solutionInfo.split("|");
-    // alert(solutionJSON);
-
     var splitData = data.split(",");
 
     var myDocument = app.activeDocument;
@@ -84,14 +76,11 @@ function drawSolution(solutionInfo, data) {
     solutionGroup.name = "Solution Group";
     solutionGroup.move(artLayer, ElementPlacement.PLACEATEND);
 
-    // NOTE: measure starts from bottom left of page - bottom, left, width, length
-
     for (var i = 0; i < splitData.length; i++){
         // removing line feeds
         var currentRow = splitData[i].replace(/[\r\n]+/, "");
         currentRowReplaced = "";
         // removing pipes between letters (remove this from py?)
-        // TODO: this is missingt he final 2 columns?
         for (var k = 0; k < currentRow.length; k++) {
             if (currentRow[k] !== "|") {
                 currentRowReplaced = currentRowReplaced + currentRow[k];
@@ -109,25 +98,19 @@ function drawSolution(solutionInfo, data) {
             textAreaCharAttrs.size = 20;
             areaTextRef.contents = currentChar;
             areaTextRef.move(solutionGroup, ElementPlacement.PLACEATEND);
-            
         }
     }
     
     for (var i = 0; i < solutionJSON.length; i++){
-        // TODO: centre the rectangles nicely
-        // TODO: round the edges?
-        alert(solutionJSON[i]);
         var solutionSplit = solutionJSON[i].split("-");
-        // alert("solution split 0: " + solutionSplit[0]);
         var wordLen = solutionSplit[0].replace(/^\s+|\s+$/gm,'').length;
-        // alert(wordLen);
+
         var direction = solutionSplit[1];
         var coords = solutionSplit[2];
-        // alert(coords);
+
         var coord1 = coords.split(", ")[0].slice(1);
-        // alert(coord1)
         var coord2 = coords.split(", ")[1].slice(0, coords.split(", ")[1].length - 1);
-        // alert(coord2)
+
         // NOTE: info formatted as word-direction-(coord1,coord2)
         var textRect;
         if (direction == "across") {
@@ -153,7 +136,6 @@ function drawSolution(solutionInfo, data) {
         textRect.filled = false;
         textRect.strokeColor = blackCMYK;
         textRect.move(solutionGroup, ElementPlacement.PLACEATEND);
-            
         }
     }
 

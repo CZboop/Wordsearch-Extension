@@ -18,7 +18,6 @@ class WordSearch:
         '''
         Get a random coordinate but only if viable based on direction and word length
         '''
-        # TODO: seems not working properly, sometimes giving invalid coords (example was with diag up issue with row too high, check/test overall though, prob all need fixing...)
         if direction == "across":
             row_range = (0, len(self.grid) - 1)
             col_range = (0, len(self.grid[0]) - len(word))
@@ -67,11 +66,7 @@ class WordSearch:
         col = location[1]
         for letter in word:
             element_at_loc = self.grid[row][col]
-            # TODO: sometimes not handling overlaps properly, need to fix!
             if element_at_loc == "" or element_at_loc == letter:
-                # if element_at_loc != "":
-                #     print(f"ELEMENT AT LOC: {element_at_loc}")
-                #     print(f"LETTER: {letter}")
                 # increment row/col based on direction
                 if direction == "across":
                     col += 1
@@ -129,18 +124,20 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Creates a wordsearch from the given words"
     )
-    # parser.add_argument("size", type=int)
+
     parser.add_argument("words", nargs="*", type=str)
     args = parser.parse_args()
-    # size = args.size
-    # TODO: have the size be optional and if not given use the longest word as base
+
+    # NOTE: not taking size but using longest word length as base
     word_list = args.words
     max_len = max([len(i) for i in word_list])
     size = (int(max_len * 1.5), int(max_len * 1.5))
+
     print("wordsearch_output")
     search = WordSearch(size, word_list)
     search.create_word_search()
     search.return_solution()
+
     print("****")
     word_n_placement = search.words_placed
     placement_string = "|".join([f"{i['word']}-{i['direction']}-{i['coord']}" for i in word_n_placement])
